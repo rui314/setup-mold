@@ -8,11 +8,11 @@ inputs:
   make-default:
     description: 'Make mold the default linker'
     required: true
-    default: true
+    default: "true"
 runs:
   using: "composite"
   steps:
     - run: wget -O- --quiet https://github.com/rui314/mold/releases/download/v${{ inputs.mold-version }}/mold-${{ inputs.mold-version }}-$(uname -m)-linux.tar.gz | sudo tar -C /usr/local --strip-components=1 -xzf -
       shell: bash
-    - run: test ${{ inputs.make-default }} = true && sudo ln -sf /usr/bin/mold $(realpath /usr/bin/ld); true
+    - run: test ${{ inputs.make-default }} = true && sudo ln -sf /usr/local/bin/mold $(realpath /usr/bin/ld); true
       shell: bash
