@@ -4,11 +4,11 @@ inputs:
   mold-version:
     description: 'The mold version to download'
     required: true
-    default: '1.1.1'
+    default: '1.2.0'
   make-default:
     description: 'Make mold the default linker'
     required: true
-    default: "true"
+    default: true
 runs:
   using: "composite"
   steps:
