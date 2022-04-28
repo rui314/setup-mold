@@ -4,13 +4,13 @@ inputs:
   mold-version:
     description: 'The mold version to download'
     required: true
-    default: '1.2.0'
+    default: '1.2.1'
   make-default:
     description: 'Make mold the default linker'
     required: true
     default: true
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - run: wget -O- --quiet https://github.com/rui314/mold/releases/download/v${{ inputs.mold-version }}/mold-${{ inputs.mold-version }}-$(uname -m)-linux.tar.gz | sudo tar -C /usr/local --strip-components=1 -xzf -
       shell: bash
