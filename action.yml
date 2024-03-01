@@ -12,7 +12,8 @@ runs:
   steps:
     - run: |
         echo "mold ${{ inputs.mold-version }}"
-        wget -O- --timeout=10 --waitretry=3 --retry-connrefused https://github.com/rui314/mold/releases/download/v${{ inputs.mold-version }}/mold-${{ inputs.mold-version }}-$(uname -m)-linux.tar.gz | sudo tar -C /usr/local --strip-components=1 --no-overwrite-dir -xzf -
-        test ${{ inputs.make-default }} = true -a "$(realpath /usr/bin/ld)" != /usr/local/bin/mold && sudo ln -sf /usr/local/bin/mold "$(realpath /usr/bin/ld)"; true
+        if [ "$(whoami)" = root ]; then SUDO=; else SUDO=sudo; fi
+        wget -O- --timeout=10 --waitretry=3 --retry-connrefused https://github.com/rui314/mold/releases/download/v${{ inputs.mold-version }}/mold-${{ inputs.mold-version }}-$(uname -m)-linux.tar.gz | $SUDO tar -C /usr/local --strip-components=1 --no-overwrite-dir -xzf -
+        test ${{ inputs.make-default }} = true -a "$(realpath /usr/bin/ld)" != /usr/local/bin/mold && $SUDO ln -sf /usr/local/bin/mold "$(realpath /usr/bin/ld)"; true
       shell: bash
       if: runner.os == 'linux'
