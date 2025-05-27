@@ -3,7 +3,7 @@ description: 'Install mold as the default linker'
 inputs:
   mold-version:
     description: 'The mold version to download'
-    default: '2.39.1'
+    default: '2.40.0'
   make-default:
     description: 'Make mold the default linker'
     default: true
